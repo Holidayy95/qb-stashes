@@ -1,6 +1,5 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 
-
 CreateThread(function()
     if Config.UseTarget then
         CreateThread(function()
@@ -37,7 +36,7 @@ CreateThread(function()
         local ped = PlayerPedId()
         local inZone = false
 
-        for k, v in pairs(Config.Stashes) do
+        for k in pairs(Config.Stashes) do
 
             local dist = #(GetEntityCoords(ped)-vector3(Config.Stashes[k].coords.x, Config.Stashes[k].coords.y, Config.Stashes[k].coords.z))
             if dist <= 2.0 then
@@ -74,7 +73,7 @@ RegisterNetEvent('qb-business:client:openStash', function(currentstash, _)
     local PlayerGang = PlayerData.gang.name
     local canOpen = false
 
-    if Config.PoliceOpen then 
+    if Config.PoliceOpen then
         if PlayerJob == "police" then
             canOpen = true
         end
@@ -87,7 +86,7 @@ RegisterNetEvent('qb-business:client:openStash', function(currentstash, _)
     end
 
     if Config.Stashes[currentstash].requirecid then
-        for k, v in pairs (Config.Stashes[currentstash].cid) do 
+        for _, v in pairs (Config.Stashes[currentstash].cid) do
             if QBCore.Functions.GetPlayerData().citizenid == v then
                 canOpen = true
             end
